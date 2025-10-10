@@ -1,0 +1,31 @@
+
+
+services:
+  postgres-db:
+    image: postgres:13
+    container_name: postgres-db
+    environment:
+      - POSTGRES_USER=sparkuser
+      - POSTGRES_PASSWORD=sparkpassword
+      - POSTGRES_DB=vessels
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - vessel-net
+
+  spark-app:
+    build: .
+    container_name: spark-app
+    depends_on:
+      - postgres-db
+    networks:
+      - vessel-net
+
+volumes:
+  postgres-data:
+
+networks:
+  vessel-net:
+    driver: bridge
