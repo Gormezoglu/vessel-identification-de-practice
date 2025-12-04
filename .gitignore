@@ -15,3 +15,11 @@ venv/
 
 # OS-specific
 .DS_Store
+
+# Secrets
+.env
+gcs_key.json
+
+# Parquet output files
+output_parquet/
+*.parquet
